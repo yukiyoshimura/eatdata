@@ -15,3 +15,9 @@ a:hover {
 li {
    display: inline-block;
 }
+
+img.topImage {
+  width: 640px;
+  height: 360px;
+  opacity: 0.7;
+}
