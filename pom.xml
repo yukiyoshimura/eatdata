@@ -50,6 +50,12 @@
 	  <version>3.0-alpha-1</version>
 	</dependency>
 
+  <!-- mysql -->
+	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <version>5.1.37</version>
+	</dependency>
 
   <!-- jersey -->
   
