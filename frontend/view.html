@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja">
 <link rel="stylesheet" type="text/css" href="./css/view.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script type="text/javascript" src="./js/viewctrl.js"></script>
 
+<ul id="menu">
+  <li><a href="./index.html">Top</a></li>
+  <li><a href="#">xxx</a></li>
+  <li><a href="#">xxx</a></li>
+  <li><a href="#">xxx</a></li>
+  <li><a href="#">xxx</a></li>
+</ul>
 <table class="sample_01">
   <tbody>
     <tr>
@@ -13,16 +22,29 @@
     <tr>
       <td>001</td>
       <td>Yoshimura</td>
-      <td>ここはチェックボックスにする</td>
-      <td>テスト</td>
+      <td>
+        <input type="radio" name="attend1" value="1" checked>参加する
+        <input type="radio" name="attend1" value="2" >欠席する
+      </td>
+      <td>
+        <input type="textbox" name=comment>
+      </td>
     </tr>
     <tr>
       <td>002</td>
       <td>ダースベーダー</td>
-      <td>ここはチェックボックスにする</td>
-      <td>test</td>
+      <td>
+        <input type="radio" name="attend2" value="1" checked>参加する
+        <input type="radio" name="attend2" value="2">欠席する
+      </td>
+      <td>
+        <input type="textbox" name=comment>
+      </td>
     </tr>
 </tbody>
 </table>
+
+<br>
+<button type="submit" class="btn btn-primary">Submit</button>
 
 </html>
