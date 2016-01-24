@@ -12,3 +12,30 @@ function attendChecked(onTarget,offTarget,ischecked){
       document.getElementById(offTarget).disabled = false;
    }
 }
+
+
+$(function init() {
+  $.ajax({
+    url: 'http://localhost/api/eatdata/respondent',
+    dataType: 'jsonp', // 追加
+    type: "GET",
+    success: function(res) {
+      console.log(res);
+    },
+    error: function(xhr, status ,err){
+      console.log(xhr);
+      console.log('status' + status);
+      console.log('err' + err);
+    }
+  });
+});
+
+
+
+/*
+  url = 'http://localhost/api/eatdata/hello'
+  $.get(url , function(data) {
+    alert("request data" + data);
+  });
+});
+*/

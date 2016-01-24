@@ -20,6 +20,6 @@ public class HelloResourceTest extends JerseyTest {
 
     @Override
     protected AppDescriptor configure() {
-        return new Builder(HelloResource.class).build();
+        return new Builder(RespondentResource.class).build();
     }
 }
