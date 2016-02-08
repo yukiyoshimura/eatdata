@@ -24,9 +24,9 @@ public class RespondentResource {
 	@Consumes("application/json")
 	@Produces("application/json")
     @GET
-    public   Response getRespondent(String respondentParams) throws JsonParseException, JsonMappingException, IOException {
+    public   Response getRespondent(@QueryParam("callback") String callback) throws JsonParseException, JsonMappingException, IOException {
     	System.out.println("respondent");
-    	System.out.println(respondentParams + "respondentParams");
+    	System.out.println(callback + "callback");
     	
     	RespondentBean bean = new RespondentBean();
     	ObjectMapper mapper 	= new ObjectMapper();
@@ -39,7 +39,7 @@ public class RespondentResource {
 		// JavaBeansオブジェクトをJSON文字列へ変換
 		String jsonStr = mapper.writeValueAsString(bean);
 		
-		return Response.ok().entity(jsonStr).build();
+		return Response.ok().entity(callback +  "(" + jsonStr + ")"  ).build();
     	
     	
     }
