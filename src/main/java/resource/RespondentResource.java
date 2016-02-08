@@ -26,7 +26,7 @@ public class RespondentResource {
     @GET
     public   Response getRespondent(String respondentParams) throws JsonParseException, JsonMappingException, IOException {
     	System.out.println("respondent");
-        
+    	System.out.println(respondentParams + "respondentParams");
     	
     	RespondentBean bean = new RespondentBean();
     	ObjectMapper mapper 	= new ObjectMapper();
