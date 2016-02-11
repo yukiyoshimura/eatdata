@@ -13,7 +13,6 @@ function attendChecked(onTarget,offTarget,ischecked){
    }
 }
 
-
 $(function init() {
   $.ajax({
     url: 'http://localhost/api/eatdata/respondent',
@@ -21,6 +20,10 @@ $(function init() {
     type: "GET",
     success: function(res) {
       console.log(res);
+      console.log(res.name);
+      console.log($('table#list td#test').text());
+      $('table#list td#test').text(res.name);
+//      $('#test').val('satoshi@email.com');
     },
     error: function(xhr, status ,err){
       console.log(xhr);
@@ -29,13 +32,3 @@ $(function init() {
     }
   });
 });
-
-
-
-/*
-  url = 'http://localhost/api/eatdata/hello'
-  $.get(url , function(data) {
-    alert("request data" + data);
-  });
-});
-*/
