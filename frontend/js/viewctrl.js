@@ -34,10 +34,13 @@ $(function init() {
   });
 });
 
-var array = [{"no" : 1 , "name" : "山田"},
-		{"no" : 2 , "name" : "田中"},
-		{"no" : 3 , "name" : "鈴木"},
-		{"no" : 4 , "name" : "川口"}];
+
+//$('#myModal').modal('show');
+
+var array = [{"no" : 1 , "name" : "山田", "status" : "参加","comment" : "アレルギーあり"},
+		{"no" : 2 , "name" : "田中", "status" : "欠席","comment" : "モチベ低下"},
+		{"no" : 3 , "name" : "鈴木", "status" : "未定","comment" : "美味しいものがあるなら行きます"},
+		{"no" : 4 , "name" : "川口", "status" : "参加","comment" : "ボーリング楽しみです♪"}];
 
 function addRowToBottom()
 {
@@ -49,8 +52,10 @@ function addRowToBottom()
 		var tr = $('<tr/>');
 		$('<td/>').text(data.no).appendTo(tr);
 		$('<td/>').text(data.name).appendTo(tr);
-    $('<td/>').append('<input type="radio" name="attend1" value="1" checked>参加する<input type="radio" name="attend1" value="2" >欠席する').appendTo(tr);
-    $('<td/>').append('<input type="textbox" name=comment>').appendTo(tr);
+    $('<td/>').text(data.status).appendTo(tr);
+    $('<td/>').text(data.comment).appendTo(tr);
+//    $('<td/>').append('<input type="radio" name="attend1" value="1" checked>参加する<input type="radio" name="attend1" value="2" >欠席する').appendTo(tr);
+//    $('<td/>').append('<input type="textbox" name=comment>').appendTo(tr);
 
 		$('#listbody').append(tr);
 	}
