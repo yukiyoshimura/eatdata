@@ -35,12 +35,41 @@ $(function init() {
 });
 
 
+$(function(){
+  $('#myModal').on('initialize',function(event,initObj){
+    $('#modalHead').text(initObj.head);
+    $('#modalBody').text(initObj.body);
+  });
+});
+
+$(function(){
+  $('#myModal').on('show',function(){
+    var initObj = {
+//      head: $('#headText').val(),
+//      body: $('#bodyText').val()
+      head: $('#headText').val(),
+      body: $('#bodyText').val()
+
+    };
+    $('#myModal').trigger('initialize',[initObj]);
+  });
+});
+
 //$('#myModal').modal('show');
 
 var array = [{"no" : 1 , "name" : "山田", "status" : "参加","comment" : "アレルギーあり"},
 		{"no" : 2 , "name" : "田中", "status" : "欠席","comment" : "モチベ低下"},
 		{"no" : 3 , "name" : "鈴木", "status" : "未定","comment" : "美味しいものがあるなら行きます"},
 		{"no" : 4 , "name" : "川口", "status" : "参加","comment" : "ボーリング楽しみです♪"}];
+
+
+function updateStatus()
+{
+  var selectVal1 = $("#select_status").val();
+  var selectVal2 = $("#comment_text").val();
+  alert(selectVal1 + selectVal2);
+  alert('test');
+}
 
 function addRowToBottom()
 {
