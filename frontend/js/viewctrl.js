@@ -44,14 +44,15 @@ $(function(){
 
 $(function(){
   $('#myModal').on('show',function(){
-    var initObj = {
+    console.log('testmodal');
+//    var initObj = {
 //      head: $('#headText').val(),
 //      body: $('#bodyText').val()
-      head: $('#headText').val(),
-      body: $('#bodyText').val()
+//      head: $('#headText').val(),
+//      body: $('#bodyText').val()
 
-    };
-    $('#myModal').trigger('initialize',[initObj]);
+//    };
+//    $('#myModal').trigger('initialize',[initObj]);
   });
 });
 
@@ -65,10 +66,30 @@ var array = [{"no" : 1 , "name" : "山田", "status" : "参加","comment" : "ア
 
 function updateStatus()
 {
+
+
+  var rows = list.rows; // 行オブジェクトの取得
+  var cells;
+  for (var i=0; i < rows.length; i++){
+      cells = rows[i].cells;
+      console.log(cells.length); // 列数を出力
+      for (var j=0; j < cells.length; j++){
+      //console.log('i:' + ' j:' + $(cells[j]).text());
+      console.log('i:' + ' j:' + $(rows[i].cells[j]).text());
+      }
+  }
+
+//行番号取得
+  $("tr").click( function(){
+    alert($("tr").index(this));
+  });
+
+
+
   var selectVal1 = $("#select_status").val();
   var selectVal2 = $("#comment_text").val();
   alert(selectVal1 + selectVal2);
-  alert('test');
+  $('#myModal').modal('hide');
 }
 
 function addRowToBottom()
@@ -79,7 +100,7 @@ function addRowToBottom()
 	{
 		var data = array[i];
 		var tr = $('<tr/>');
-		$('<td/>').text(data.no).appendTo(tr);
+    $('<td/>').append($('<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"></button>').text(data.no)).appendTo(tr);
 		$('<td/>').text(data.name).appendTo(tr);
     $('<td/>').text(data.status).appendTo(tr);
     $('<td/>').text(data.comment).appendTo(tr);
