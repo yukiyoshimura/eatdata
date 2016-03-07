@@ -34,7 +34,7 @@ $(function init() {
   });
 });
 
-
+/*
 $(function(){
   $('#myModal').on('initialize',function(event,initObj){
     $('#modalHead').text(initObj.head);
@@ -42,22 +42,21 @@ $(function(){
   });
 });
 
+*/
 
-/*
 $(function(){
   $('#myModal').on('show',function(){
-    console.log('testmodal');
+    console.log('modalshow');
+    /*
+    var initObj = {
+      head: $('#headText').val(),
+      body: $('#bodyText').val()
+    };
+    $('#myModal').trigger('initialize',[initObj]);
     */
-//    var initObj = {
-//      head: $('#headText').val(),
-//      body: $('#bodyText').val()
-//      head: $('#headText').val(),
-//      body: $('#bodyText').val()
+  });
+});
 
-//    };
-//    $('#myModal').trigger('initialize',[initObj]);
-//  });
-//});
 
 //$('#myModal').modal('show');
 
@@ -77,6 +76,8 @@ function getrow(){
 
 
 }
+var activeName;
+var activeStatus;
 
 function rowinfo(rownum){
 //  var rows = list.rows; // 行オブジェクトの取得
@@ -84,17 +85,29 @@ function rowinfo(rownum){
   var cells = list.rows[rownum].cells;
   console.log("row=>" + rownum);
 
+  //氏名
+  activeName = $(list.rows[rownum].cells[1]).text();
+  activeStatus = $(list.rows[rownum].cells[2]).text();
+
+
+  console.log('指名' + $(list.rows[rownum].cells[1]).text());
+
   for (var j=0; j < cells.length; j++){
     console.log(cells.length); // 列数を出力
     console.log('rownum:' + ' j:' + $(list.rows[rownum].cells[j]).text());
 
   }
+
 }
 
 //
 function updateStatus(){
+  console.log('updateStatus');
   var rows = list.rows; // 行オブジェクトの取得
   var cells;
+
+  console.log('activeName' + activeName);
+  console.log('activeStatus' + activeStatus);
 
   var selectVal1 = $("#select_status").val();
   var selectVal2 = $("#comment_text").val();
