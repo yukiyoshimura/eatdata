@@ -56,6 +56,7 @@ var array = [{"no" : 1 , "name" : "山田", "status" : "参加","comment" : "ア
 
 var activeName;
 var activeStatus;
+var activeComment;
 
 // 選択した行の各値を取得する
 function rowinfo(rownum){
@@ -65,6 +66,8 @@ function rowinfo(rownum){
   activeName = $(list.rows[rownum].cells[1]).text();
   //参加状況
   activeStatus = $(list.rows[rownum].cells[2]).text();
+  activeComment = $(list.rows[rownum].cells[3]).text();
+
   console.log('氏名' + $(list.rows[rownum].cells[1]).text());
 
   for (var j=0; j < cells.length; j++){
@@ -75,6 +78,7 @@ function rowinfo(rownum){
 
 }
 
+var recipient;
 //　更新ボタン押下時の処理
 //  モーダルに入力した値で更新を行う
 function updateStatus(){
@@ -82,46 +86,35 @@ function updateStatus(){
   var rows = list.rows; // 行オブジェクトの取得
   var cells;
 
-  console.log('activeName' + activeName);
-  console.log('activeStatus' + activeStatus);
-
   var selectVal1 = $("#select_status").val();
   var selectVal2 = $("#comment_text").val();
+
   alert(selectVal1 + selectVal2);
   $('#myModal').modal('hide');
 }
 
 $(function() {
-$('#exampleModal').on('show.bs.modal', function (event) {
-  console.log('modalshow');
-  var button = $(event.relatedTarget); // Button that triggered the modal
-  var recipient = button.data('whatever'); // Extract info from data-* attributes
-  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+$('#editModal').on('show.bs.modal', function (event) {
+  console.log('test_modalshow');
+//  var button = $(event.relatedTarget); // Button that triggered the modal
+
   var modal = $(this);
-  modal.find('.modal-title').text('New message to ' + recipient);
-  modal.find('.modal-body input').val(recipient);
+//  modal.find('.modal-title').text('New message to ' + activeName);
+  modal.find('.modal-body #current-username').val(activeName);
+  modal.find('.modal-body #current-status').val(activeStatus);
+  modal.find('.modal-body #current-comment').val(activeComment);
+    console.log(modal.find('.modal-body'));
   });
 });
-
-$('#myModal').on('show.bs.modal', function (event) {
-  console.log('a');
-  var button = $(event.relatedTarget); //モーダルを呼び出すときに使われたボタンを取得
-  var recipient = button.data('whatever'); //data-whatever の値を取得
-
-  //Ajaxの処理はここに
-
-  var modal = $(this);  //モーダルを取得
-  modal.find('.modal-title').text('New message to ' + recipient); //モーダルのタイトルに値を表示
-  modal.find('.modal-body input#recipient-name').val(recipient); //inputタグにも表示
-})
 
 
 //行番号取得
 function getrow(){
+  console.log('getrow');
     $("tr").click( function(){
       rowinfo($("tr").index(this));
     });
+
 }
 
 // 取得したレコードをテーブルで表示する
@@ -131,13 +124,11 @@ function addRowToBottom(){
 	{
 		var data = array[i];
 		var tr = $('<tr/>');
-//    $('<td/>').append($('<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" data-whatever="@mdo" onclick="getrow()"></button>').text(data.no)).appendTo(tr);
-$('<td/>').append($('<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="getrow()"></button>').text(data.no)).appendTo(tr);
+    console.log('data' + data.no);
+    $('<td/>').append($('<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#editModal" onclick="getrow()"></button>').text(data.no)).appendTo(tr);
 		$('<td/>').text(data.name).appendTo(tr);
     $('<td/>').text(data.status).appendTo(tr);
     $('<td/>').text(data.comment).appendTo(tr);
-//    $('<td/>').append('<input type="radio" name="attend1" value="1" checked>参加する<input type="radio" name="attend1" value="2" >欠席する').appendTo(tr);
-//    $('<td/>').append('<input type="textbox" name=comment>').appendTo(tr);
 
 		$('#listbody').append(tr);
 	}
