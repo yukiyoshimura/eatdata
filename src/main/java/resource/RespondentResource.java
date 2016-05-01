@@ -25,14 +25,14 @@ public class RespondentResource {
 	@Produces("application/json")
     @GET
     public   Response getRespondent(@QueryParam("callback") String callback) throws JsonParseException, JsonMappingException, IOException {
-    	System.out.println("respondent");
+    	System.out.println("regist");
     	System.out.println(callback + "callback");
     	
     	RespondentBean bean = new RespondentBean();
     	ObjectMapper mapper 	= new ObjectMapper();
 		
 //		RespondentBean bean = mapper.readValue(respondentParams, RespondentBean.class);
-		bean.setName("test");
+		bean.setName("regist test");
 		bean.setNo("1");
 		
 		

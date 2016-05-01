@@ -60,12 +60,20 @@
       <div class="modal-body">
         <form>
           <div class="form-group">
+            <label for="current-userno" class="control-label">No:</label>
+            <input type="text" class="form-control" id="current-userno" readonly="true">
+          </div>
+          <div class="form-group">
             <label for="current-username" class="control-label">氏名:</label>
-            <input type="text" class="form-control" id="current-username">
+            <input type="text" class="form-control" id="current-username" readonly="true">
           </div>
           <div class="form-group">
             <label for="current-status" class="control-label">出欠:</label>
-            <textarea class="form-control" id="current-status"></textarea>
+            <select id="status-list">
+              <option value="1">参加</option>
+              <option value="2">欠席</option>
+              <option value="3">未定</option>
+            </select>
           </div>
           <div class="form-group">
             <label for="current-comment" class="control-label">その他:</label>
@@ -75,39 +83,13 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">更新</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<br>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">更新したい内容で入力してください</h4>
-      </div>
-      <div class="modal-body">
-      <SELECT id="select_status">
-        <OPTION value="attend">参加</OPTION>
-        <OPTION value="absent">欠席</OPTION>
-        <OPTION value="undeceided">未定</OPTION>
-      </SELECT>
-      <input type="textbox" id=comment_text name=comment>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="button" id="update_button" class="btn btn-primary" onclick="updateStatus()">更新する</button>
       </div>
     </div>
   </div>
 </div>
+
+<br>
+
 
 </html>

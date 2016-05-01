@@ -28,7 +28,7 @@ $(function init() {
       $('table#list td#test').text(res.name);
       // 取得したレコードをテーブルで表示する
       addRowToBottom();
-//      $('#test').val('satoshi@email.com');
+
     },
     error: function(xhr, status ,err){
       console.log(xhr);
@@ -38,22 +38,13 @@ $(function init() {
   });
 });
 
-/*
-$(function(){
-  $('#myModal').on('initialize',function(event,initObj){
-    $('#modalHead').text(initObj.head);
-    $('#modalBody').text(initObj.body);
-  });
-});
-
-*/
-
 // テストデータ
 var array = [{"no" : 1 , "name" : "山田", "status" : "参加","comment" : "アレルギーあり"},
 		{"no" : 2 , "name" : "田中", "status" : "欠席","comment" : "モチベ低下"},
 		{"no" : 3 , "name" : "鈴木", "status" : "未定","comment" : "美味しいものがあるなら行きます"},
 		{"no" : 4 , "name" : "川口", "status" : "参加","comment" : "ボーリング楽しみです♪"}];
 
+var activeNo;
 var activeName;
 var activeStatus;
 var activeComment;
@@ -62,10 +53,14 @@ var activeComment;
 function rowinfo(rownum){
   var cells = list.rows[rownum].cells;
   console.log("row=>" + rownum);
+
+  //社員番号
+  activeNo   = $(list.rows[rownum].cells[0]).text();
   //氏名
   activeName = $(list.rows[rownum].cells[1]).text();
   //参加状況
-  activeStatus = $(list.rows[rownum].cells[2]).text();
+  activeStatus  = $(list.rows[rownum].cells[2]).text();
+  //その他
   activeComment = $(list.rows[rownum].cells[3]).text();
 
   console.log('氏名' + $(list.rows[rownum].cells[1]).text());
@@ -78,32 +73,53 @@ function rowinfo(rownum){
 
 }
 
-var recipient;
 //　更新ボタン押下時の処理
 //  モーダルに入力した値で更新を行う
 function updateStatus(){
   console.log('updateStatus');
-  var rows = list.rows; // 行オブジェクトの取得
-  var cells;
+  var applyNo = $("#current-userno").val();
+　var applyName = $("#current-username").val();
+  var applyStatus = $("#status-list").val();
+  var applyComment = $("#current-comment").val();
 
-  var selectVal1 = $("#select_status").val();
-  var selectVal2 = $("#comment_text").val();
+  console.log(applyNo + applyName + applyStatus + applyComment);
 
-  alert(selectVal1 + selectVal2);
+$.ajax({
+  url: 'http://localhost/api/eatdata/regist',
+  dataType: 'json', // 追加
+  type: 'POST',
+  contentType: 'application/json',
+  data: {
+    'no'    :applyNo,
+    'name'  :applyName,
+    'status':applyStatus,
+    'comment':applyComment
+  },
+  success: function(res) {
+    console.log(res);
+    console.log('post success');
+//    console.log(data);
+  },
+  error: function(xhr, status ,err){
+    console.log(xhr);
+    console.log('status' + status);
+    console.log('err' + err);
+  }
+});
+
+
   $('#myModal').modal('hide');
 }
 
 $(function() {
 $('#editModal').on('show.bs.modal', function (event) {
-  console.log('test_modalshow');
-//  var button = $(event.relatedTarget); // Button that triggered the modal
-
+  console.log('modal open');
+  console.log(activeNo);
   var modal = $(this);
-//  modal.find('.modal-title').text('New message to ' + activeName);
   modal.find('.modal-body #current-username').val(activeName);
   modal.find('.modal-body #current-status').val(activeStatus);
   modal.find('.modal-body #current-comment').val(activeComment);
-    console.log(modal.find('.modal-body'));
+
   });
 });
 
