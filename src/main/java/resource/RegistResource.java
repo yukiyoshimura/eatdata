@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import responseBean.RegistResponseBean;
-import responseBean.RespondentBean;
+import responseBean.TRespondentBean;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -29,12 +29,11 @@ public class RegistResource {
     	System.out.println("星respondent");
 //    	System.out.println(callback + "callback");
 
-    	RespondentBean bean = new RespondentBean();
+    	TRespondentBean bean = new TRespondentBean();
     	ObjectMapper mapper 	= new ObjectMapper();
 		
 //		RespondentBean bean = mapper.readValue(respondentParams, RespondentBean.class);
-		bean.setName("test");
-		bean.setNo("1");
+
 		
 		
 		// JavaBeansオブジェクトをJSON文字列へ変換
