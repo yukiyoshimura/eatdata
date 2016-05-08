@@ -5,7 +5,8 @@ var respondentList;
 // 一覧取得
 $(function init() {
   $.ajax({
-    url: 'http://localhost/api/eatdata/respondent',
+//    url: 'http://eatdata.azurewebsites.net/eatdata/api/respondent',
+url: 'http://localhost:8080/eatdata/api/respondent',
     dataType: 'jsonp', // 追加
     type: "GET",
     success: function(res) {
@@ -81,25 +82,28 @@ function updateStatus(){
   console.log('updateStatus');
   var applyNo = $("#current-userno").val();
 　var applyName = $("#current-username").val();
-  var applyStatus = $("#status-list").val();
+  var applyStatus = $("#current-status").val();
   var applyComment = $("#current-comment").val();
 
-  console.log('applyNo:' + applyNo);
-  console.log('applyName:' + applyName);
-  console.log('applyStatus:' + applyStatus);
-  console.log('applyComment:' + applyComment);
+  console.log('employeeId:' + applyNo);
+  console.log('employeeNm:' + applyName);
+  console.log('respondentStatus:' + applyStatus);
+  console.log('comment:' + applyComment);
+
+    // 各フィールドから値を取得してJSONデータを作成
+  var data = {
+      employeeId:      applyNo,
+      employeeNm:      applyName,
+      respondentStatus:applyStatus,
+      comment:         applyComment
+  };
 
 $.ajax({
-  url: 'http://localhost/api/eatdata/regist',
+  url: 'http://localhost:8080/eatdata/api/regist',
   dataType: 'json', // 追加
   type: 'POST',
   contentType: 'application/json',
-  data: {
-    'no'    :applyNo,
-    'name'  :applyName,
-    'status':applyStatus,
-    'comment':applyComment
-  },
+  data:JSON.stringify(data),
   success: function(res) {
     console.log(res);
     console.log('post success');

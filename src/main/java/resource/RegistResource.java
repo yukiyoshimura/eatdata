@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 
 import responseBean.RegistResponseBean;
 import responseBean.TRespondentBean;
+import responseBean.WRespondentBean;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -25,10 +26,11 @@ public class RegistResource {
 	@Consumes("application/json")
 	@Produces("application/json")
     @POST
-    public Response regist() throws JsonParseException, JsonMappingException, IOException {
-    	System.out.println("星respondent");
-//    	System.out.println(callback + "callback");
-
+    public Response regist(WRespondentBean registParam) throws JsonParseException, JsonMappingException, IOException {
+    	System.out.println("regist respondent");
+    	
+    	System.out.println(registParam.getEmployeeId());
+    	
     	TRespondentBean bean = new TRespondentBean();
     	ObjectMapper mapper 	= new ObjectMapper();
 		
