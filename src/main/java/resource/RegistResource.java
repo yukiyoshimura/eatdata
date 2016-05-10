@@ -1,6 +1,7 @@
 package resource;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Map;
 
 import javax.ws.rs.Consumes;
@@ -19,6 +20,10 @@ import responseBean.WRespondentBean;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mysql.jdbc.Connection;
+
+import connector.MySQLConnector;
+import dao.WRespondentDao;
 
 @Path("regist")
 public class RegistResource {
@@ -26,10 +31,29 @@ public class RegistResource {
 	@Consumes("application/json")
 	@Produces("application/json")
     @POST
-    public Response regist(WRespondentBean registParam) throws JsonParseException, JsonMappingException, IOException {
+    public Response regist(WRespondentBean request) throws JsonParseException, JsonMappingException, IOException, ClassNotFoundException, SQLException {
     	System.out.println("regist respondent");
     	
-    	System.out.println(registParam.getEmployeeId());
+    	System.out.println(request.getEmployeeId());
+       	MySQLConnector conn = new MySQLConnector();
+       	Connection connection = null;
+       	
+    	WRespondentDao dao = new WRespondentDao();
+    	
+    	try {
+    		connection = conn.getConnection();	
+        	String result = dao.updateWRespondent(connection, request);
+		} catch (SQLException e) {
+			System.out.println("SQLError");
+			e.printStackTrace();
+		} finally {
+			//connection close
+			if (connection != null){
+				conn.closeConn(connection);			
+			}
+		}
+    	
+
     	
     	TRespondentBean bean = new TRespondentBean();
     	ObjectMapper mapper 	= new ObjectMapper();
@@ -43,7 +67,7 @@ public class RegistResource {
 		
 		return Response.ok()
 				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+				.header("Access-Control-Allow-Methods", "POST")
 				.entity(jsonStr).build();
 		
     }
