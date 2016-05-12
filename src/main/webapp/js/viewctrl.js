@@ -26,12 +26,6 @@ url: 'http://localhost:8080/eatdata/api/respondent',
   });
 });
 
-// テストデータ
-var array = [{"no" : 1 , "name" : "山田", "status" :{code:"1",text:"参加"},"comment" : "アレルギーあり"},
-		{"no" : 2 , "name" : "田中", "status" : {code:"2",text:"欠席"},"comment" : "モチベ低下"},
-		{"no" : 3 , "name" : "鈴木", "status" : {code:"1",text:"参加"},"comment" : "美味しいものがあるなら行きます"},
-		{"no" : 4 , "name" : "川口", "status" : {code:"1",text:"参加"},"comment" : "ボーリング楽しみです♪"}];
-
 var activeNo;
 var activeName;
 var activeStatus;
@@ -107,7 +101,8 @@ $.ajax({
   success: function(res) {
     console.log(res);
     console.log('post success');
-//    console.log(data);
+    location.reload();
+
   },
   error: function(xhr, status ,err){
     console.log(xhr);
@@ -117,7 +112,7 @@ $.ajax({
 });
 
 
-  $('#myModal').modal('hide');
+  $('#editModal').modal('hide');
 }
 
 //行番号取得

@@ -8,7 +8,7 @@ import com.mysql.jdbc.PreparedStatement;
 
 public class WRespondentDao {
 
-public String updateWRespondent(Connection con, WRespondentBean request) throws SQLException{
+public String insertWRespondent(Connection con, WRespondentBean request) throws SQLException{
     	
     	System.out.println("Start WRespondentDao");
         

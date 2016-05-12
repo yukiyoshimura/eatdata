@@ -23,6 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mysql.jdbc.Connection;
 
 import connector.MySQLConnector;
+import dao.TRespondentDao;
 import dao.WRespondentDao;
 
 @Path("regist")
@@ -38,11 +39,15 @@ public class RegistResource {
        	MySQLConnector conn = new MySQLConnector();
        	Connection connection = null;
        	
-    	WRespondentDao dao = new WRespondentDao();
+    	WRespondentDao wDao = new WRespondentDao();
+    	TRespondentDao tDao = new TRespondentDao();
+
     	
     	try {
     		connection = conn.getConnection();	
-        	String result = dao.updateWRespondent(connection, request);
+        	String resultIns = wDao.insertWRespondent(connection, request);
+        	String resultUpd = tDao.updateTRespondent(connection, request);
+        	
 		} catch (SQLException e) {
 			System.out.println("SQLError");
 			e.printStackTrace();

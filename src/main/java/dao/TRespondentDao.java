@@ -5,8 +5,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import responseBean.TRespondentBean;
+import responseBean.WRespondentBean;
+
 import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 
 public class TRespondentDao {
@@ -88,5 +92,44 @@ public List<TRespondentBean> getTRespondent(Connection con) throws SQLException{
         
         return records;
     }
+
+public String updateTRespondent(Connection con, WRespondentBean request) throws SQLException{
+	
+	System.out.println("Start TRespondentDao");
+    
+    String sql = 
+		    " update  " 
+			 + "   t_respondent res,"
+			 + "   m_employee emp"
+			 + "  set"
+			 + "   res.respondent_status = ?,"
+			 + "   res.comment = ?,"
+			 + "   res.update_date = now()"
+			 + " where"
+			 + "   res.employee_id = ? "
+			 + " and "
+			 + "   res.employee_id = emp.employee_id "
+			 + " and "
+			 + "   emp.valid_flg = '1' "
+			 ;
+    
+    PreparedStatement pstmt = (PreparedStatement) con.prepareStatement(sql);
+    pstmt.setString(1,request.getRespondentStatus());
+    pstmt.setString(2,request.getComment());
+    pstmt.setString(3,request.getEmployeeId());
+
+    
+    try {
+    	int cnt = pstmt.executeUpdate();
+    	System.out.println("executeSQL" + sql);
+		System.out.println("取得結果 UPDATE-> " +  cnt);
+		
+	} catch (SQLException e) {
+		System.out.println("SQLエラー");
+		e.printStackTrace();
+	}
+    
+    return "OK";
+}
 	
 }
