@@ -25,7 +25,7 @@ public class MySQLConnector {
 			System.out.println("Connetcting....." + url);
 	        // MySQLに接続
             con = (Connection) DriverManager.getConnection(url, user, password);
-///            con = (Connection) DriverManager.getConnection("jdbc:mysql://ja-cdbr-azure-east-a.cloudapp.net:3306/eatdata", "b3d674e06c3e5b", "bb28b0c7");
+///            con = (Connection) DriverManager.getConnection("jdbc:mysql://ja-cdbr-azure-east-a.cloudapp.net:3306/eatdata", "b3d674e06c3e5b", "xxxxx");
             System.out.println("MySQLに接続できました。");
 		} catch (SQLException e) {
 			System.out.println("Connector Error MySQL接続に失敗しました。");

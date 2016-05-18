@@ -44,7 +44,10 @@ public List<TRespondentBean> getTRespondent(Connection con) throws SQLException{
         		+ "     code = res.respondent_status) as status_text, "
         		+ "   res.comment,"
         		+ "   res.create_date," 
-        		+ "   res.update_date"
+        		+ "   res.update_date,"
+        		+ "   (select count(*) as cnt from t_respondent where respondent_status = '1') as sumAttend,"
+        		+ "   (select count(*) as cnt from t_respondent where respondent_status = '2') as sumAbsent,"
+        		+ "   (select count(*) as cnt from t_respondent where respondent_status = '3') as sumUndecided"
         		+ " from"
         		+ "   t_respondent res,"
         		+ "   m_employee emp"
@@ -73,6 +76,10 @@ public List<TRespondentBean> getTRespondent(Connection con) throws SQLException{
 				bean.setComment(rs.getString("comment"));
 				bean.setCreateDate(rs.getString("create_date"));
 				bean.setUpdateDate(rs.getString("update_date"));
+				bean.setSumAttend(rs.getString("sumAttend"));
+				bean.setSumAbsent(rs.getString("sumAbsent"));
+				bean.setsumUndecided(rs.getString("sumUndecided"));
+				
 				
 				records.add(bean);
 			    System.out.println("取得結果 -> " +  bean.getRespondentId());

@@ -1,11 +1,16 @@
 
 var respondentList;
 
+var activeNo;
+var activeName;
+var activeStatus;
+var activeComment;
+
 // init処理
 // 一覧取得
 $(function init() {
   $.ajax({
-//    url: 'http://eatdata.azurewebsites.net/eatdata/api/respondent',
+  //  url: 'http://eatdata.azurewebsites.net/eatdata/api/respondent',
 url: 'http://localhost:8080/eatdata/api/respondent',
     dataType: 'jsonp', // 追加
     type: "GET",
@@ -14,9 +19,9 @@ url: 'http://localhost:8080/eatdata/api/respondent',
       console.log('init success');
       console.log(res);
 
+      getSumValue();
       // 取得したレコードをテーブルで表示する
       addRowToBottom();
-
     },
     error: function(xhr, status ,err){
       console.log(xhr);
@@ -26,10 +31,40 @@ url: 'http://localhost:8080/eatdata/api/respondent',
   });
 });
 
-var activeNo;
-var activeName;
-var activeStatus;
-var activeComment;
+// ステータス毎の合計値をフォームにセット
+function getSumValue(){
+  sumarry_table.rows[1].cells[0].innerText = respondentList[0].sumAttend;
+  sumarry_table.rows[1].cells[1].innerText = respondentList[0].sumAbsent;
+  sumarry_table.rows[1].cells[2].innerText = respondentList[0].sumUndecided;
+}
+
+
+// サーバから取得したレコードをテーブルで表示する
+function addRowToBottom(){
+  console.log('addRowToBottom');
+
+
+	for(i = 0; i < respondentList.length; i++)
+	{
+    var data = respondentList[i];
+    var tr = $('<tr/>');
+    console.log(respondentList[i]);
+
+        $('<td/>').append($('<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#editModal" onclick="getrow()"></button>').text(data.employeeId)).appendTo(tr);
+    		$('<td/>').text(data.employeeNm).appendTo(tr);
+        $('<td/>').append($('<select id="initstatus" disabled />').append($('<option>').val(data.respondentStatus.code).text(data.respondentStatus.text))).appendTo(tr);
+        $('<td/>').text(data.comment).appendTo(tr);
+    		$('#listbody').append(tr);
+  }
+}
+
+//行番号取得
+function getrow(){
+  console.log('getrow');
+    $("tr").click( function(){
+      rowinfo($("tr").index(this));
+    });
+}
 
 // 選択した行の各値を取得する
 function rowinfo(rownum){
@@ -45,13 +80,7 @@ function rowinfo(rownum){
   activeComment = $(list.rows[rownum].cells[3]).text();
 
   console.log('氏名' + $(list.rows[rownum].cells[1]).text());
-
   console.log('rowcnt==>' + cells.length); // 列数を出力
-  for (var j=0; j < cells.length; j++){
-    console.log('rownum:' + ' j:' + $(list.rows[rownum].cells[j]).text());
-
-  }
-
 }
 
 // 押下した行の編集用モーダルを表示
@@ -92,52 +121,24 @@ function updateStatus(){
       comment:         applyComment
   };
 
-$.ajax({
-  url: 'http://localhost:8080/eatdata/api/regist',
-  dataType: 'json', // 追加
-  type: 'POST',
-  contentType: 'application/json',
-  data:JSON.stringify(data),
-  success: function(res) {
-    console.log(res);
-    console.log('post success');
-    location.reload();
-
-  },
-  error: function(xhr, status ,err){
-    console.log(xhr);
-    console.log('status' + status);
-    console.log('err' + err);
-  }
+  $.ajax({
+  //  url: 'http://eatdata.azurewebsites.net/eatdata/api/regist',
+    url: 'http://localhost:8080/eatdata/api/regist',
+    dataType: 'json', // 追加
+    type: 'POST',
+    contentType: 'application/json',
+    data:JSON.stringify(data),
+    success: function(res) {
+      console.log(res);
+      console.log('post success');
+      location.reload();
+    },
+    error: function(xhr, status ,err){
+      console.log(xhr);
+      console.log('status' + status);
+      console.log('err' + err);
+    }
 });
 
-
   $('#editModal').modal('hide');
-}
-
-//行番号取得
-function getrow(){
-  console.log('getrow');
-    $("tr").click( function(){
-      rowinfo($("tr").index(this));
-    });
-
-}
-
-// サーバから取得したレコードをテーブルで表示する
-function addRowToBottom(){
-  console.log('addRowToBottom');
-	for(i = 0; i < respondentList.length; i++)
-	{
-
-    var data = respondentList[i];
-    var tr = $('<tr/>');
-    console.log(respondentList[i]);
-
-    $('<td/>').append($('<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#editModal" onclick="getrow()"></button>').text(data.employeeId)).appendTo(tr);
-		$('<td/>').text(data.employeeNm).appendTo(tr);
-    $('<td/>').append($('<select id="initstatus" disabled />').append($('<option>').val(data.respondentStatus.code).text(data.respondentStatus.text))).appendTo(tr);
-    $('<td/>').text(data.comment).appendTo(tr);
-		$('#listbody').append(tr);
-	}
 }

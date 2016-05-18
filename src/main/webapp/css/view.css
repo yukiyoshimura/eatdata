@@ -11,11 +11,30 @@ color: #333;
 background-color: #a4e0a2;
 border: 1px solid #b9b9b9;
 }
+
+.sumarry_table th{
+width: 25%;
+padding: 6px;
+text-align: left;
+vertical-align: top;
+color: #333;
+background-color: #a4e0a2;
+border: 1px solid #b9b9b9;
+}
+
+
 .sample_01 td{
 padding: 6px;
 background-color: #fff;
 border: 1px solid #b9b9b9;
 }
+
+.sumarry_table td{
+padding: 6px;
+background-color: #fff;
+border: 1px solid #b9b9b9;
+}
+
 
 #menu {
   width:530px;

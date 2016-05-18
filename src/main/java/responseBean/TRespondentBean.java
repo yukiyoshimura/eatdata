@@ -19,6 +19,12 @@ public class TRespondentBean {
 	private String updateDate;
 	
 	public HashMap<String, String> respondentStatus = new HashMap<String, String>();
+	
+	public String sumAttend;
+	
+	public String sumAbsent;
+	
+	public String sumUndecided;
 
 	public String getRespondentId() {
 		return respondentId;
@@ -74,6 +80,30 @@ public class TRespondentBean {
 
 	public void setRespondentStatus(HashMap<String, String> respondentStatus) {
 		this.respondentStatus = respondentStatus;
+	}
+
+	public String getSumAttend() {
+		return sumAttend;
+	}
+
+	public void setSumAttend(String sumAttend) {
+		this.sumAttend = sumAttend;
+	}
+
+	public String getSumAbsent() {
+		return sumAbsent;
+	}
+
+	public void setSumAbsent(String sumAbsent) {
+		this.sumAbsent = sumAbsent;
+	}
+
+	public String getsumUndecided() {
+		return sumUndecided;
+	}
+
+	public void setsumUndecided(String sumUndecided) {
+		this.sumUndecided = sumUndecided;
 	}
 
 
