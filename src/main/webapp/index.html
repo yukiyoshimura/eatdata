@@ -1,33 +1,52 @@
-<!DOCTYPE html>
-<html lang="ja">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>eatData</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="js/jquery.bxslider.min.js"></script>
-    <link href="css/jquery.bxslider.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="./css/index.css" media="all">
-    <script type="text/javascript">
-            $(document).ready(function(){
-                $('.bxslider').bxSlider({
-                    auto: true,
-                });
-        	});
-    </script>
-  </head>
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
+	<link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
+	<script src="js/modernizr.js"></script> <!-- Modernizr -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="js/main.js"></script> <!-- Resource jQuery -->
+
+	<title>Easier than yesterday</title>
+</head>
 <body>
-  <h2>eatdata</h2>
-  <ul>
-    <li><a href="view.html">出欠確認・入力画面</a></li>
-  </ul>
-  <div align="center">
-    <ul class="bxslider">
-  		<li><img class="topImage" src="./images/welcome1.jpg"></li>
-  		<li><img class="topImage" src="./images/welcome2.jpg"></li>
-  		<li><img class="topImage" src="./images/welcome3.jpg"></li>
-      <li><img class="topImage" src="./images/welcome4.jpg"></li>
-    </ul>
-  </div>
-  <br>
+	<header class="cd-header">
+		<div id="cd-logo"><a href="#0"><img src="images/cd-logo.png" alt="Logo"></a></div>
+
+		<nav class="cd-main-nav">
+			<ul>
+				<!-- inser more links here -->
+				<li><a href="#0">Home</a></li>
+				<li><a href="view.html">Attendance</a></li>
+				<li><a href="#0">CollectIdea</a></li>
+				<li><a href="#0">Gallery</a></li>
+				<li><a href="#0">Contact</a></li>
+			</ul>
+		</nav> <!-- cd-main-nav -->
+	</header>
+
+	<main class="cd-main-content">
+		<div class="cd-fixed-bg cd-bg-1">
+			<h1>easier than yesterday</h1>
+		</div> <!-- cd-fixed-bg -->
+
+		<div class="cd-fixed-bg cd-bg-2">
+			<h2>Event input and summary attendance</h2>
+		</div> <!-- cd-fixed-bg -->
+
+		<div class="cd-fixed-bg cd-bg-3">
+			<h2>gathed something request</h2>
+		</div> <!-- cd-fixed-bg -->
+
+		<div class="cd-fixed-bg cd-bg-4">
+			<h2>easier than yesterday</h2>
+		</div> <!-- cd-fixed-bg -->
+	</main> <!-- cd-main-content -->
+
 </body>
 </html>
