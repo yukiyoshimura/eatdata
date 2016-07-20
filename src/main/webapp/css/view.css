@@ -1,3 +1,20 @@
+.ui-progressbar {
+  width: 500px;
+   height: 20px;
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   margin: -10px 0 0 -250px;
+}
+.progress-label {
+  position: absolute;
+  left: 50%;
+  top: 4px;
+  font-weight: bold;
+  text-shadow: 1px 1px 0 #fff;
+}
+
+
 .sample_01{
 width: 100%;
 border-collapse: collapse;
@@ -35,6 +52,12 @@ background-color: #fff;
 border: 1px solid #b9b9b9;
 }
 
+#initstatus {
+ background-color: #FFFFFF;
+ color: #000000;
+ -webkit-appearance: none;
+ border: none;
+}
 
 #menu {
   width:530px;

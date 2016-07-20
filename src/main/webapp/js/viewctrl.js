@@ -6,19 +6,27 @@ var activeName;
 var activeStatus;
 var activeComment;
 
+
+$(function() {
+   $( "#progressbar" ).progressbar({
+      value: false
+   });
+});
+
 // init処理
 // 一覧取得
 $(function init() {
   $.ajax({
-  //  url: 'http://eatdata.azurewebsites.net/eatdata/api/respondent',
-url: 'http://localhost:8080/eatdata/api/respondent',
+      url: 'http://eatdata.azurewebsites.net/eatdata/api/respondent',
+// url: 'http://localhost:8080/eatdata/api/respondent',
     dataType: 'jsonp', // 追加
     type: "GET",
     success: function(res) {
       respondentList = res;
       console.log('init success');
       console.log(res);
-
+      // progress bar hide
+      $( "#progressbar" ).hide();
       getSumValue();
       // 取得したレコードをテーブルで表示する
       addRowToBottom();
@@ -85,16 +93,17 @@ function rowinfo(rownum){
 
 // 押下した行の編集用モーダルを表示
 $(function() {
-$('#editModal').on('show.bs.modal', function (event) {
-  console.log('===modal open====');
-  console.log('activeNo:' + activeNo);
-  console.log('activeStatus:' + activeStatus);
+  $('#editModal').on('show.bs.modal', function (event) {
+    console.log('===modal open====');
+    console.log('activeNo:' + activeNo);
+    console.log('activeStatus:' + activeStatus);
+    console.log('activeComment:' + activeComment);
 
-  var modal = $(this);
-  modal.find('.modal-body #current-userno').val(activeNo);
-  modal.find('.modal-body #current-username').val(activeName);
-  modal.find('.modal-body #current-status').val(activeStatus);
-  modal.find('.modal-body #current-comment').val(activeComment);
+    var modal = $(this);
+    modal.find('.modal-body #current-userno').val(activeNo);
+    modal.find('.modal-body #current-username').val(activeName);
+    modal.find('.modal-body #current-status').val(activeStatus);
+    modal.find('.modal-body #current-comment').val(activeComment);
 
   });
 });
@@ -122,13 +131,14 @@ function updateStatus(){
   };
 
   $.ajax({
-  //  url: 'http://eatdata.azurewebsites.net/eatdata/api/regist',
-    url: 'http://localhost:8080/eatdata/api/regist',
+    url: 'http://eatdata.azurewebsites.net/eatdata/api/regist',
+//    url: 'http://localhost:8080/eatdata/api/regist',
     dataType: 'json', // 追加
     type: 'POST',
     contentType: 'application/json',
     data:JSON.stringify(data),
     success: function(res) {
+      $('#editModal').modal('hide');
       console.log(res);
       console.log('post success');
       location.reload();
@@ -138,7 +148,5 @@ function updateStatus(){
       console.log('status' + status);
       console.log('err' + err);
     }
-});
-
-  $('#editModal').modal('hide');
+  });
 }

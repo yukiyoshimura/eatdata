@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="ja">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="./css/view.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<!-- Latest compiled and minified JavaScript -->
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="./js/viewctrl.js"></script>
-
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="./css/view.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <!-- Latest compiled and minified JavaScript -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <!-- for progressbar -->
+        <link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+        <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+        <script type="text/javascript" src="./js/viewctrl.js"></script>
+    </head>
 <ul id="menu">
-  <li><a href="./index.html">HOME</a></li>
+<!--  <li><a href="./index.html">HOME</a></li> -->
 </ul>
+<div id="progressbar"><div class="progress-label">Loading...</div></div>
 <table id="list" class="sample_01">
   <tbody id="listbody">
     <tr>
-      <th>社員番号</th>
+      <th>社員番号(該当の社員番号をクリック)</th>
       <th>氏名</th>
       <th>出欠</th>
       <th>その他</th>
@@ -31,23 +36,24 @@
       <th>合計(未定)</th>
     </tr>
     <tr>
-      <td>a</td>
-      <td>b</td>
-      <td>c</td>
+      <td></td>
+      <td></td>
+      <td></td>
 </tbody>
 </table>
 
+<!-- modal -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="editModalLabel">変更したい値をセットしてください</h4>
+        <h4 class="modal-title" id="editModalLabel">出欠について入力してください</h4>
       </div>
       <div class="modal-body">
         <form>
           <div class="form-group">
-            <label for="current-userno" class="control-label">No:</label>
+            <label for="current-userno" class="control-label">社員番号:</label>
             <input type="text" class="form-control" id="current-userno" readonly="true">
           </div>
           <div class="form-group">
@@ -63,7 +69,9 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="current-comment" class="control-label">その他:</label>
+            <label for="current-comment" class="control-label">その他:<br>参加する家族の人数を以下区分毎で何名になるかを記入ください。
+              <br>※本人のみ参加の場合は記入不要です。
+              <br>区分(大人(中学生以上) / 小学生 / 3歳〜小学生未満 / 3歳以下)<br>意気込みご意見もお待ちしております。</label>
             <textarea class="form-control" id="current-comment"></textarea>
           </div>
         </form>
