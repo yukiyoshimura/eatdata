@@ -22,8 +22,8 @@ import com.mysql.jdbc.Connection;
 import connector.MySQLConnector;
 import dao.TRespondentDao;
 
-@Path("respondent")
-public class RespondentResource {
+@Path("event")
+public class EventResource {
 
     @Consumes("application/json")
     @Produces("application/json")
@@ -32,7 +32,7 @@ public class RespondentResource {
         System.out.println(callback + "callback");
         
         List<TRespondentBean> beans = new ArrayList<TRespondentBean>();
-        ObjectMapper mapper     = new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper();
         
         MySQLConnector conn = new MySQLConnector();
         TRespondentDao trespondent = new TRespondentDao();
@@ -58,6 +58,6 @@ public class RespondentResource {
         // JavaBeansオブジェクトをJSON文字列へ変換
         String jsonStr = mapper.writeValueAsString(beans);
         return Response.ok().entity(callback +  "(" + jsonStr + ")"  ).build();
+        
     }
-
 }
