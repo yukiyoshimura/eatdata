@@ -28,7 +28,7 @@ public class EventResource {
     @Consumes("application/json")
     @Produces("application/json")
     @GET
-    public   Response getRespondent(@QueryParam("callback") String callback) throws JsonParseException, JsonMappingException, IOException, ClassNotFoundException, SQLException {
+    public Response getRespondent(@QueryParam("callback") String callback) throws JsonParseException, JsonMappingException, IOException, ClassNotFoundException, SQLException {
         System.out.println(callback + "callback");
         
         List<TRespondentBean> beans = new ArrayList<TRespondentBean>();
