@@ -46,7 +46,7 @@ public class RegistResource {
         }
         
         TRespondentBean bean = new TRespondentBean();
-        ObjectMapper mapper     = new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper();
         
         // JavaBeansオブジェクトをJSON文字列へ変換
         String jsonStr = mapper.writeValueAsString(bean);

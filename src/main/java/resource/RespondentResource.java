@@ -28,11 +28,11 @@ public class RespondentResource {
     @Consumes("application/json")
     @Produces("application/json")
     @GET
-    public   Response getRespondent(@QueryParam("callback") String callback) throws JsonParseException, JsonMappingException, IOException, ClassNotFoundException, SQLException {
+    public Response getRespondent(@QueryParam("callback") String callback) throws JsonParseException, JsonMappingException, IOException, ClassNotFoundException, SQLException {
         System.out.println(callback + "callback");
         
         List<TRespondentBean> beans = new ArrayList<TRespondentBean>();
-        ObjectMapper mapper     = new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper();
         
         MySQLConnector conn = new MySQLConnector();
         TRespondentDao trespondent = new TRespondentDao();
