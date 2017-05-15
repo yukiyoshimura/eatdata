@@ -23,41 +23,49 @@ import connector.MySQLConnector;
 import dao.TRespondentDao;
 
 @Path("respondent")
-public class RespondentResource {
+public class RespondentResource extends AbstractResource<TRespondentBean> {
 
     @Consumes("application/json")
     @Produces("application/json")
     @GET
     public Response getRespondent(@QueryParam("callback") String callback) throws JsonParseException, JsonMappingException, IOException, ClassNotFoundException, SQLException {
-        System.out.println(callback + "callback");
-        
-        List<TRespondentBean> beans = new ArrayList<TRespondentBean>();
-        ObjectMapper mapper = new ObjectMapper();
-        
-        MySQLConnector conn = new MySQLConnector();
-        TRespondentDao trespondent = new TRespondentDao();
-        
-        Connection connection = null;
-        
-        try {
-            connection = conn.getConnection();    
-            beans = trespondent.getTRespondent(connection);
-        } catch (SQLException e) {
-            System.out.println("SQLError");
-            e.printStackTrace();
-        } finally {
-            //connection close
-            if (connection != null){
-                conn.closeConn(connection);            
+    	   System.out.println(callback + "callback");
+           
+           List<TRespondentBean> beans = new ArrayList<TRespondentBean>();
+           
+           // resouce set to beans
+           setResource(beans);
+          
+           System.out.println("0番目！" + beans.get(0).getEmployeeId());
+           System.out.println("1番目！" + beans.get(1).getEmployeeId());
+           
+           // JavaBeansオブジェクトをJSON文字列へ変換
+           ObjectMapper mapper = new ObjectMapper();
+           String jsonStr = mapper.writeValueAsString(beans);
+           return Response.ok().entity(callback +  "(" + jsonStr + ")"  ).build();
+       }
+       
+       @Override
+       public List<TRespondentBean> setResource(List<TRespondentBean> setList) {
+            MySQLConnector conn = new MySQLConnector();
+            TRespondentDao trespondent = new TRespondentDao();
+            Connection connection = null;
+            try {               	
+                connection = conn.getConnection();
+                setList = trespondent.getTRespondent(connection);
+            } catch (SQLException | ClassNotFoundException e) {
+                System.out.println("SQLError");
+                e.printStackTrace();
+            } finally {
+                //connection close
+                if (connection != null){
+                    try {
+                        conn.closeConn(connection);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }            
+                }
             }
+            return setList;
         }
-        
-        System.out.println("0番目！" + beans.get(0).getEmployeeId());
-        System.out.println("1番目！" + beans.get(1).getEmployeeId());
-        
-        // JavaBeansオブジェクトをJSON文字列へ変換
-        String jsonStr = mapper.writeValueAsString(beans);
-        return Response.ok().entity(callback +  "(" + jsonStr + ")"  ).build();
     }
-
-}
