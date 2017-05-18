@@ -25,35 +25,38 @@ import dao.MEventDao;
 @Path("event")
 public class EventResource extends AbstractResource<MEventBean> {
 
+    @GET
     @Consumes("application/json")
     @Produces("application/json")
-    @GET
     public Response geMEvent(@QueryParam("callback") String callback) throws JsonParseException, JsonMappingException, IOException, ClassNotFoundException, SQLException {
+    	logger.info("start geMEvent");
         System.out.println(callback + "callback");
         
         List<MEventBean> beans = new ArrayList<MEventBean>();
         
         // resouce set to beans
-        setResource(beans);
+        beans = setResource(beans);
        
-        System.out.println("0番目！" + beans.get(0).getEventId());
-        System.out.println("1番目！" + beans.get(1).getEventName());
+        logger.debug("0番目！" + beans.get(0).getEventId());
+        logger.debug("1番目！" + beans.get(1).getEventName());
         
         // JavaBeansオブジェクトをJSON文字列へ変換
         ObjectMapper mapper = new ObjectMapper();
         String jsonStr = mapper.writeValueAsString(beans);
+        logger.debug(jsonStr);
+        logger.info("end geMEvent");
         return Response.ok().entity(callback +  "(" + jsonStr + ")"  ).build();
     }
     
     @Override
-    public List<MEventBean> setResource(List<MEventBean> setList) {
+    public List<MEventBean> setResource(List<MEventBean> beans) {
 
          MySQLConnector conn = new MySQLConnector();
          MEventDao mevent = new MEventDao();
          Connection connection = null;
          try {               	
              connection = conn.getConnection();
-             setList = mevent.getMEventDao(connection);
+             beans = mevent.getMEventDao(connection);
          } catch (SQLException | ClassNotFoundException e) {
              System.out.println("SQLError");
              e.printStackTrace();
@@ -67,6 +70,6 @@ public class EventResource extends AbstractResource<MEventBean> {
                  }            
              }
          }
-         return setList;
+         return beans;
      }
 }

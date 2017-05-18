@@ -1,0 +1,24 @@
+<configuration>
+  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <file>/Applications/develop/workspace/log/eatadata_web.log</file>
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern>%d%m</pattern>
+    </encoder>
+  </appender>
+  
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern>%d%m</pattern>
+    </encoder>
+  </appender>
+  
+  <logger name= "eatdata">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="FILE" />
+  </logger>
+  <logger name= "sql">
+    <appender-ref ref="FILE" />
+  </logger>
+</configuration>
