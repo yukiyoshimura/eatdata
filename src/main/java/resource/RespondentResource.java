@@ -39,7 +39,7 @@ public class RespondentResource extends AbstractResource<TRespondentBean> {
            
            // resouce set to beans
            beans = setResource(beans);
-          
+
            // JavaBeansオブジェクトをJSON文字列へ変換
            ObjectMapper mapper = new ObjectMapper();
            String jsonStr = mapper.writeValueAsString(beans);
@@ -50,7 +50,7 @@ public class RespondentResource extends AbstractResource<TRespondentBean> {
        
        @Override
        public List<TRespondentBean> setResource(List<TRespondentBean> beans) {
-           System.out.println("setResouce:Start");
+            System.out.println("setResouce:Start");
             MySQLConnector conn = new MySQLConnector();
             TRespondentDao trespondent = new TRespondentDao();
             Connection connection = null;
